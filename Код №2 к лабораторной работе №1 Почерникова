@@ -1,0 +1,49 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <iomanip>
+
+void printSmart(double value) {
+    std::cout << std::fixed << std::setprecision(12) << value;
+}
+
+int main() {
+    std::vector<double> measurements = {
+        0.3583, 0.3580, 0.3595, 0.3599, 0.3593,
+        0.3594, 0.3592, 0.3590, 0.3593, 0.3588,
+        0.3575, 0.3588, 0.3575, 0.3585, 0.3579,
+        0.3578, 0.3581, 0.3583, 0.3584, 0.3582,
+        0.3584, 0.3582, 0.3586, 0.3582, 0.3588,
+        0.3578, 0.3583, 0.3581, 0.3577, 0.3583,
+        0.3581, 0.3582, 0.3578, 0.3583, 0.3586,
+        0.3582, 0.3584, 0.3582, 0.3584, 0.3581,
+        0.3587, 0.3584, 0.3581, 0.3580, 0.3581,
+        0.3584, 0.3585, 0.3586, 0.3579, 0.3582
+    };
+
+    double sum = 0.0;
+    for (double u : measurements) {
+        sum += u;
+    }
+    double mean = sum / measurements.size();
+
+    std::cout << "Среднее значение: ";
+    printSmart(mean);
+    std::cout << "\n\n";
+
+    for (int i = 0; i < measurements.size(); ++i) {
+        double Ux = measurements[i];
+        double d = Ux - mean;
+        double d_squared = d * d;
+
+        std::cout << "Измерение " << i + 1 << ": Ux = ";
+        printSmart(Ux);
+        std::cout << ", d = ";
+        printSmart(d);
+        std::cout << ", d^2 = ";
+        printSmart(d_squared);
+        std::cout << std::endl;
+    }
+
+    return 0;
+}
