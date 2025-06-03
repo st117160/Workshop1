@@ -1,0 +1,23 @@
+#include <iostream>
+#include <vector>
+
+double calculateInstrumentError(double Ux, double Uk = 10.0) {
+    double beta_percent = 0.05 + 0.05 * (Uk / Ux);  
+    return (beta_percent * Ux) / 100.0;  
+
+
+int main() {
+    std::vector<double> measurements = {
+        0.356, 0.357, 0.358, 0.355, 0.356,
+        0.357, 0.356, 0.357, 0.356, 0.357
+    };
+
+    for (int i = 0; i < measurements.size(); ++i) {
+        double Ux = measurements[i];
+        double deltaU = calculateInstrumentError(Ux);
+        std::cout << "Измерение " << i + 1 << ": Ux = " << Ux
+                  << ", Погрешность = " << deltaU << " В" << std::endl;
+    }
+
+    return 0;
+}
